@@ -1,0 +1,137 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Métodos de Pago</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-spinner *ngIf="isLoading" class="loading-spinner"></ion-spinner>
+
+  <div *ngIf="!isLoading" class="payment-methods-container">
+    <ion-card *ngFor="let method of paymentMethods; let i = index" 
+              class="payment-card animate__animated animate__fadeInUp"
+              [style.animation-delay]="i * 0.1 + 's'">
+      <div class="card-content">
+        <div class="card-background"></div>
+        <div class="card-info">
+          <div class="card-type">
+            <ion-chip [color]="method.type === 'debit' ? 'success' : 'primary'">
+              {{ method.type === 'debit' ? 'Débito' : 'Crédito' }}
+            </ion-chip>
+          </div>
+          <div class="card-number">**** **** **** {{ method.lastFourDigits }}</div>
+          <div class="card-details">
+            <div class="card-holder">
+              <span class="label">Titular</span>
+              <span class="value">{{ method.cardHolderName }}</span>
+            </div>
+            <div class="card-expiry">
+              <span class="label">Expira</span>
+              <span class="value">{{ method.expirationDate }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <ion-button fill="clear" (click)="deletePaymentMethod(method.id)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </ion-card>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="showAddPaymentMethodModal()" class="animate__animated animate__bounceIn">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-modal [isOpen]="isAddPaymentMethodModalOpen" (didDismiss)="isAddPaymentMethodModalOpen = false" class="add-payment-method-modal">
+  <ng-template>
+    <div class="modal-content">
+      <h2>Agregar nuevo método de pago</h2>
+      <div class="card-preview">
+        <div class="chip"></div>
+        <div class="card-icon">
+          <ion-icon name="card-outline"></ion-icon>
+        </div>
+        <div class="card-number">**** **** **** {{ paymentMethodForm.get('lastFourDigits')?.value || '****' }}</div>
+        <div class="card-info">
+          <div>
+            <label>TITULAR</label>
+            <p>{{ paymentMethodForm.get('cardHolderName')?.value || 'NOMBRE DEL TITULAR' }}</p>
+          </div>
+          <div>
+            <label>EXPIRA</label>
+            <p>{{ paymentMethodForm.get('expirationDate')?.value || 'MM/YY' }}</p>
+          </div>
+        </div>
+        <div class="card-type">
+          {{ paymentMethodForm.get('type')?.value === 'credit' ? 'CRÉDITO' : 'DÉBITO' }}
+        </div>
+      </div>
+      
+      <form [formGroup]="paymentMethodForm" (ngSubmit)="addPaymentMethod()">
+        <ion-item class="custom-item">
+          <ion-label position="stacked">Nombre del titular</ion-label>
+          <ion-input formControlName="cardHolderName" type="text" placeholder="Ingrese nombre completo"></ion-input>
+        </ion-item>
+        <div *ngIf="cardHolderName?.touched && cardHolderName?.invalid" class="error-message">
+          Nombre del titular es requerido
+        </div>
+
+        <div class="card-type-selector">
+          <ion-segment formControlName="type" mode="ios">
+            <ion-segment-button value="credit">
+              <ion-label>Crédito</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="debit">
+              <ion-label>Débito</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+
+        <ion-item class="custom-item">
+          <ion-label position="stacked">Últimos 4 dígitos</ion-label>
+          <ion-input formControlName="lastFourDigits" type="text" maxlength="4" placeholder="Ingrese los últimos 4 dígitos"></ion-input>
+        </ion-item>
+        <div *ngIf="lastFourDigits?.touched && lastFourDigits?.invalid" class="error-message">
+          Ingrese 4 dígitos válidos
+        </div>
+
+        <ion-item class="custom-item">
+          <ion-label position="stacked">Fecha de expiración</ion-label>
+          <ion-input formControlName="expirationDate" type="text" placeholder="MM/YY"></ion-input>
+        </ion-item>
+        <div *ngIf="expirationDate?.touched && expirationDate?.invalid" class="error-message">
+          Fecha de expiración inválida
+        </div>
+
+        <div class="button-group">
+          <ion-button class="cancel-button" (click)="isAddPaymentMethodModalOpen = false">
+            <ion-icon name="close-outline"></ion-icon>
+            <span>Cancelar</span>
+          </ion-button>
+          <ion-button class="add-button" type="submit" [disabled]="!paymentMethodForm.valid">
+            <ion-icon name="add-outline"></ion-icon>
+            <span>Agregar tarjeta</span>
+          </ion-button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+</ion-modal>
+
+<ion-loading [isOpen]="isLoading" message="Procesando..." spinner="crescent"></ion-loading>
+
+<div class="success-message" [class.show]="showSuccessMessage">
+  <div class="success-icon">
+    <ion-icon name="checkmark-circle-outline"></ion-icon>
+  </div>
+  <h3>¡Tarjeta registrada exitosamente!</h3>
+  <p>Tu nuevo método de pago ha sido agregado.</p>
+</div>

@@ -1,0 +1,210 @@
+/* Estilos para el contenedor */
+.register-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: 20px;
+}
+
+/* Estilos del logo */
+.logo-container {
+  margin-bottom: 40px;
+  perspective: 1000px;
+  width: 180px;
+  height: 180px;
+}
+
+.logo-frame {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  animation: float 6s ease-in-out infinite;
+}
+
+.logo {
+  width: 75%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.logo-frame:hover {
+  transform: scale(1.05) rotateY(10deg);
+  box-shadow: 0 15px 35px rgba(31, 38, 135, 0.5);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotateZ(0);
+  }
+  50% {
+    transform: translateY(-10px) rotateZ(5deg);
+  }
+}
+
+/* Título del registro */
+.register-title {
+  font-size: 2.5rem;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajustes para el formulario */
+form {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Estilos para los elementos del formulario */
+ion-item {
+  --background: rgba(255, 255, 255, 0.2);
+  --color: #ffffff;
+  --placeholder-color: rgba(255, 255, 255, 0.6);
+  --highlight-color-focused: #ffffff;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
+
+ion-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+ion-input {
+  color: #ffffff;
+}
+
+/* Estilos para el botón */
+.register-button {
+  --background: #ffffff;
+  --background-activated: #f4f4f4;
+  --background-focused: #f4f4f4;
+  --color: #667eea;
+  margin-top: 30px;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  height: 54px;
+  font-size: 18px;
+  text-transform: none;
+}
+
+/* Estilo para los mensajes de error */
+.error-message {
+  color: #ffd740;
+  font-size: 0.8rem;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  
+  ion-icon {
+    margin-right: 5px;
+    font-size: 1rem;
+  }
+  
+  small {
+    font-weight: 500;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.register-container > * {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.register-container > *:nth-child(1) { animation-delay: 0.1s; }
+.register-container > *:nth-child(2) { animation-delay: 0.2s; }
+.register-container > *:nth-child(3) { animation-delay: 0.3s; }
+.register-container > *:nth-child(4) { animation-delay: 0.4s; }
+.register-container > *:nth-child(5) { animation-delay: 0.5s; }
+
+ion-content {
+  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+// Ajuste para el input de confirmación de contraseña
+ion-item:last-of-type {
+  margin-bottom: 20px;
+}
+
+.custom-loading {
+  --background: rgba(255, 255, 255, 0.9);
+  --spinner-color: #667eea;
+  --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  
+  .loading-wrapper {
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .loading-content {
+    font-size: 18px;
+    font-weight: 500;
+    color: #667eea;
+  }
+}
+
+.custom-toast {
+  --background: #4caf50;
+  --box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+  --color: #ffffff;
+  
+  &::part(message) {
+    font-weight: 500;
+  }
+
+  &::part(button) {
+    color: #ffffff;
+    font-size: 24px;
+  }
+}
+
+.custom-input {
+  --background: rgba(255, 255, 255, 0.2);
+  --color: #ffffff;
+  --placeholder-color: rgba(255, 255, 255, 0.6);
+  --highlight-color-focused: #ffffff;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  
+  ion-label {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  ion-icon {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    margin-right: 12px;
+  }
+}

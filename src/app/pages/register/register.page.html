@@ -1,0 +1,62 @@
+<ion-content class="ion-padding">
+  <div class="register-container">
+    <div class="logo-container">
+      <div class="logo-frame">
+        <img src="/assets/img/logo.png" alt="Logo" class="logo">
+      </div>
+    </div>
+    <h1 class="register-title">Crea tu cuenta</h1>
+    <p class="register-subtitle">Únete a FastRoust hoy</p>
+    
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <ion-item class="custom-input">
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-label position="floating">Nombre de Usuario</ion-label>
+        <ion-input type="text" formControlName="username"></ion-input>
+      </ion-item>
+      <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="error-message">
+        <ion-icon name="alert-circle"></ion-icon>
+        <small>El nombre de usuario debe tener al menos 3 caracteres.</small>
+      </div>
+      
+      <ion-item class="custom-input">
+        <ion-icon name="mail" slot="start"></ion-icon>
+        <ion-label position="floating">Correo Electrónico</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error-message">
+        <ion-icon name="alert-circle"></ion-icon>
+        <small>Ingrese un correo electrónico válido.</small>
+      </div>
+      
+      <ion-item class="custom-input">
+        <ion-icon name="lock-closed" slot="start"></ion-icon>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message">
+        <ion-icon name="alert-circle"></ion-icon>
+        <small>La contraseña debe tener al menos 6 caracteres.</small>
+      </div>
+      
+      <ion-item class="custom-input">
+        <ion-icon name="shield-checkmark" slot="start"></ion-icon>
+        <ion-label position="floating">Confirmar Contraseña</ion-label>
+        <ion-input type="password" formControlName="confirmPassword"></ion-input>
+      </ion-item>
+      <div *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched" class="error-message">
+        <ion-icon name="alert-circle"></ion-icon>
+        <small>Las contraseñas no coinciden.</small>
+      </div>
+      
+      <ion-button expand="block" class="register-button" type="submit" [disabled]="registerForm.invalid">
+        Crear cuenta
+        <ion-icon name="arrow-forward" slot="end"></ion-icon>
+      </ion-button>
+    </form>
+
+    <div class="login-link">
+      ¿Ya tienes una cuenta? <a routerLink="/login">Inicia sesión</a>
+    </div>
+  </div>
+</ion-content>

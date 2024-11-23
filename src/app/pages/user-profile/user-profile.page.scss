@@ -1,0 +1,296 @@
+:host {
+  --page-background: #f0f4f8;
+  --card-background: #ffffff;
+  --primary-color: #4a90e2;
+  --secondary-color: #50e3c2;
+  --accent-color: #ff6b6b;
+  --text-color: #2c3e50;
+  --text-light: #7f8c8d;
+  --item-background: #e8f0fe;
+  --item-background-editing: #d0e1fd;
+}
+
+ion-content {
+  --background: var(--page-background);
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background-color: var(--page-background);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.profile-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  padding: 40px 20px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 80%);
+    animation: rotate 20s linear infinite;
+  }
+}
+
+.header-content {
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-name {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: slideInDown 0.5s ease-out;
+}
+
+.profile-email {
+  font-size: 18px;
+  opacity: 0.9;
+  margin: 5px 0 0;
+  animation: slideInUp 0.5s ease-out 0.2s both;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+  animation: fadeIn 0.5s ease-out 0.4s both;
+}
+
+.stat-item {
+  text-align: center;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: bold;
+  display: block;
+}
+
+.stat-label {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.profile-content {
+  flex: 1;
+  background: var(--card-background);
+  border-radius: 20px 20px 0 0;
+  margin-top: -20px;
+  padding: 30px 20px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 20px;
+  animation: slideInLeft 0.5s ease-out;
+}
+
+ion-list {
+  background: transparent;
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --background: transparent;
+  margin-bottom: 20px;
+}
+
+ion-label {
+  color: var(--text-light);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+ion-input {
+  --padding-start: 0;
+  font-size: 16px;
+  --color: var(--text-color);
+}
+
+ion-icon {
+  color: var(--primary-color);
+  font-size: 24px;
+  margin-right: 15px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: var(--page-background);
+
+  ion-spinner {
+    margin-bottom: 20px;
+  }
+}
+
+ion-footer ion-toolbar {
+  --background: var(--card-background);
+  --border-color: transparent;
+}
+
+.edit-button {
+  --background: var(--primary-color);
+  --background-activated: var(--secondary-color);
+  --border-radius: 8px;
+  font-weight: 600;
+  margin: 0 16px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    --background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.user-data-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.user-data-item {
+  display: flex;
+  align-items: center;
+  background-color: var(--item-background);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.5s ease-out both;
+
+  @for $i from 1 through 4 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1 + 0.5}s;
+    }
+  }
+
+  &.editing {
+    background-color: var(--item-background-editing);
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  ion-icon {
+    font-size: 24px;
+    color: var(--primary-color);
+    margin-right: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover ion-icon {
+    transform: scale(1.2);
+  }
+
+  .data-content {
+    flex: 1;
+
+    ion-label {
+      display: block;
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 4px;
+      transition: color 0.3s ease;
+    }
+
+    ion-datetime {
+      --padding-start: 0;
+      font-size: 16px;
+      --color: var(--text-color);
+      transition: color 0.3s ease;
+    }
+  }
+
+  &.editing .data-content {
+    ion-label {
+      color: var(--primary-color);
+    }
+
+    ion-datetime {
+      --color: var(--accent-color);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.edit-button ion-icon {
+  animation: pulse 2s infinite;
+}

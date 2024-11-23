@@ -1,0 +1,7 @@
+{
+  "name": "FastRoust",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

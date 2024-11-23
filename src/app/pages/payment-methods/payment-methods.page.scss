@@ -1,0 +1,667 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:host {
+  --ion-font-family: 'Roboto', sans-serif;
+}
+
+ion-header {
+  ion-toolbar {
+    --background: transparent;
+    --border-width: 0;
+
+    ion-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--ion-color-primary);
+    }
+
+    ion-back-button {
+      --color: var(--ion-color-primary);
+    }
+  }
+}
+
+ion-content {
+  --background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --ion-text-color: var(--ion-color-dark);
+}
+
+.payment-methods-container {
+  padding: 16px;
+}
+
+.payment-card {
+  margin-bottom: 20px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-content {
+  position: relative;
+  padding: 20px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.card-info {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.card-type {
+  margin-bottom: 10px;
+}
+
+.card-number {
+  font-size: 22px;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.card-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-holder, .card-expiry {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 12px;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.value {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.card-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+}
+
+.card-actions ion-button {
+  --color: white;
+}
+
+ion-chip {
+  --background: rgba(255, 255, 255, 0.2);
+  --color: white;
+}
+
+ion-fab-button {
+  --background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-primary-shade));
+  --background-activated: var(--ion-color-primary-shade);
+  --background-hover: var(--ion-color-primary-tint);
+  --box-shadow: 0 4px 16px rgba(var(--ion-color-primary-rgb), 0.4);
+  transition: all 0.3s ease;
+
+  &::part(native) {
+    box-shadow: 0 4px 16px rgba(var(--ion-color-primary-rgb), 0.4);
+  }
+
+  &:active::part(native) {
+    box-shadow: 0 2px 8px rgba(var(--ion-color-primary-rgb), 0.3);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+@media (min-width: 768px) {
+  .payment-methods-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .add-payment-method-modal {
+    --width: 80%;
+    --max-width: 600px;
+  }
+}
+
+// Animaciones
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate__fadeInUp {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes bounceIn {
+  from, 20%, 40%, 60%, 80%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    transform: scale3d(.9, .9, .9);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    transform: scale3d(.97, .97, .97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.animate__bounceIn {
+  animation: bounceIn 0.8s;
+}
+
+.add-payment-method-modal {
+  --background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  
+  .modal-content {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+
+    .card-preview {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 16px;
+      padding: 24px;
+      color: white;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: rgba(255, 255, 255, 0.1);
+        transform: rotate(30deg);
+      }
+
+      .chip {
+        width: 50px;
+        height: 40px;
+        background: linear-gradient(135deg, #ffd700, #ffaa00);
+        border-radius: 8px;
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: -5px;
+          right: -5px;
+          height: 20px;
+          background: rgba(255, 255, 255, 0.1);
+          transform: translateY(-50%);
+        }
+      }
+
+      .card-type-icon {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        font-size: 24px;
+        opacity: 0.8;
+      }
+
+      .card-number {
+        font-size: 22px;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-info {
+        display: flex;
+        justify-content: space-between;
+
+        label {
+          font-size: 10px;
+          text-transform: uppercase;
+          opacity: 0.7;
+          display: block;
+          margin-bottom: 5px;
+        }
+
+        p {
+          font-size: 16px;
+          font-weight: 500;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      .card-type {
+        position: absolute;
+        bottom: 24px;
+        right: 24px;
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        opacity: 0.8;
+      }
+    }
+
+    ion-item {
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      --min-height: 65px; // Aumentamos aún más la altura mínima
+      margin-bottom: 16px;
+
+      &.item-has-focus {
+        --highlight-height: 2px;
+      }
+
+      ion-label {
+        color: var(--ion-color-medium);
+        font-size: 14px;
+        transform: translateY(-12px) scale(0.75);
+        transition: all 0.2s ease;
+      }
+
+      ion-input {
+        --padding-start: 0;
+        --padding-top: 20px;
+        font-size: 16px;
+        color: var(--ion-color-dark);
+      }
+
+      &.item-has-value,
+      &.item-has-focus {
+        ion-label {
+          color: var(--ion-color-primary);
+          transform: translateY(-25px) scale(0.75);
+        }
+      }
+    }
+
+    .card-type-selector {
+      margin-bottom: 16px;
+
+      ion-segment {
+        background: var(--ion-color-light);
+        border-radius: 8px;
+        
+        ion-segment-button {
+          --color: var(--ion-color-medium);
+          --color-checked: var(--ion-color-primary);
+          --indicator-color: var(--ion-color-primary);
+          min-height: 40px;
+          
+          ion-label {
+            font-size: 14px;
+            text-transform: none;
+          }
+        }
+      }
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+
+      ion-button {
+        width: 48%;
+        height: 44px;
+        font-size: 14px;
+        font-weight: 500;
+        --border-radius: 8px;
+      }
+    }
+  }
+}
+
+.card-type-selector {
+  ion-segment-button {
+    &[value="credit"] {
+      --color-checked: var(--ion-color-primary);
+      &::part(indicator-background) {
+        background: var(--ion-color-primary-tint);
+      }
+    }
+    &[value="debit"] {
+      --color-checked: var(--ion-color-success);
+      &::part(indicator-background) {
+        background: var(--ion-color-success-tint);
+      }
+    }
+  }
+}
+
+// Nuevas animaciones y efectos
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+// Efecto de hover para las tarjetas
+ion-card.payment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+ion-input, ion-select, ion-textarea {
+  --placeholder-color: var(--ion-color-medium);
+  --placeholder-opacity: 0.7;
+}
+
+// Ajuste para evitar superposición de texto
+ion-item.item-has-focus ion-label {
+  display: none;
+}
+
+// Animaciones para el menú
+.payment-methods-container {
+  ion-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  @for $i from 1 through 10 {
+    ion-card:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+ion-fab-button {
+  animation: bounceIn 0.5s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.success-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 9999; // Asegura que esté por encima de otros elementos
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .success-icon {
+    font-size: 60px;
+    color: var(--ion-color-success);
+    margin-bottom: 20px;
+
+    ion-icon {
+      animation: scaleIn 0.5s ease-out;
+    }
+  }
+
+  h3 {
+    font-size: 24px;
+    color: var(--ion-color-dark);
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 16px;
+    color: var(--ion-color-medium);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// Mejora la animación de las tarjetas existentes
+.payment-methods-container {
+  ion-card {
+    animation: slideInUp 0.5s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  @for $i from 1 through 10 {
+    ion-card:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.custom-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --min-height: 72px;
+  margin-bottom: 16px;
+
+  ion-label {
+    color: var(--ion-color-medium);
+    font-size: 16px;
+    transform: translateY(8px);
+    transition: all 0.2s ease;
+  }
+
+  ion-input {
+    --padding-start: 0;
+    font-size: 18px;
+    --placeholder-color: var(--ion-color-medium);
+    --placeholder-opacity: 0.7;
+  }
+
+  &.item-has-focus ion-label {
+    color: var(--ion-color-primary);
+    transform: translateY(0);
+  }
+}
+
+.error-message {
+  color: var(--ion-color-danger);
+  font-size: 14px;
+  margin-top: -12px;
+  margin-bottom: 16px;
+}
+
+.card-type-selector {
+  margin-bottom: 20px;
+
+  ion-segment {
+    --background: var(--ion-color-light);
+    border-radius: 8px;
+    
+    ion-segment-button {
+      --color: var(--ion-color-medium);
+      --color-checked: var(--ion-color-primary);
+      --indicator-color: var(--ion-color-primary);
+      min-height: 44px;
+      
+      ion-label {
+        font-size: 16px;
+        text-transform: none;
+      }
+    }
+  }
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+
+  ion-button {
+    --border-radius: 12px;
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover::before {
+      opacity: 1;
+    }
+
+    span {
+      margin-left: 8px;
+    }
+
+    &.cancel-button {
+      --background: var(--ion-color-medium);
+      --color: var(--ion-color-light);
+
+      &:hover {
+        --background: var(--ion-color-medium-shade);
+      }
+    }
+
+    &.add-button {
+      --background: var(--ion-color-primary);
+      --color: var(--ion-color-light);
+
+      &:hover:not(:disabled) {
+        --background: var(--ion-color-primary-shade);
+      }
+
+      &:disabled {
+        opacity: 0.7;
+      }
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--ion-color-primary-rgb), 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(var(--ion-color-primary-rgb), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--ion-color-primary-rgb), 0);
+  }
+}
+
+.add-button:not(:disabled) {
+  animation: pulse 2s infinite;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

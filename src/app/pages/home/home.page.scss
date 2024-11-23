@@ -1,0 +1,103 @@
+ion-content {
+  --background: url('/assets/img/background.jpg') no-repeat center center / cover;
+  background-color: rgba(0, 0, 0, 0.5); /* Filtro oscuro */
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+.app-name {
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Sombra para el texto */
+}
+
+.app-logo {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4)); /* Sombra para la imagen */
+}
+
+.app-description {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 40px;
+  padding: 0 20px;
+  background-color: rgba(0, 0, 0, 0.3); /* Fondo con transparencia */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Sombra en la descripción */
+}
+
+ion-button {
+  --background: linear-gradient(45deg, #56CCF2, #2F80ED);
+  --box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+ion-button {
+  --background: linear-gradient(45deg, #ff416c, #ff4b2b); /* Degradado vibrante */
+  --box-shadow: 0px 4px 10px rgba(255, 75, 43, 0.5); /* Sombra de color */
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+ion-button:hover {
+  --background: linear-gradient(45deg, #ff4b2b, #ff416c); /* Inversión de degradado al hacer hover */
+  --box-shadow: 0px 6px 12px rgba(255, 75, 43, 0.7);
+}
+ion-button {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+ion-button:active {
+  transform: scale(0.98); /* Efecto de clic */
+  box-shadow: 0px 2px 8px rgba(255, 75, 43, 0.5);
+}
+
+.app-logo {
+  transition: transform 0.5s ease;
+}
+
+.app-logo:hover {
+  transform: rotate(360deg); /* Rotación del logo al hacer hover */
+}
+ion-content {
+  --background: url('/assets/img/background.jpg') no-repeat center center / cover;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px); /* Desenfoque del fondo */
+}
+.app-name {
+  font-size: 3rem; /* Tamaño más grande para el nombre de la app */
+  color: #ffffff;
+  margin-bottom: 30px;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7); /* Sombra más pronunciada */
+}
+
+ion-button {
+  --background: linear-gradient(45deg, #00c6ff, #0072ff);
+  --box-shadow: 0px 5px 15px rgba(0, 114, 255, 0.5);
+  border-radius: 50px; /* Botones más redondeados */
+  padding: 15px 30px;
+  font-size: 1.4rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 20px;
+}

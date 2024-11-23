@@ -1,0 +1,47 @@
+<ion-content class="ion-padding">
+  <div class="login-container">
+    <div class="logo-container">
+      <div class="logo-frame">
+        <img src="/assets/img/logo.png" alt="Logo" class="logo">
+      </div>
+    </div>
+    <h1 class="login-title">Bienvenido a FastRoust</h1>
+    <p class="login-subtitle">Tu plataforma de gestión inteligente</p>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <ion-item class="custom-input">
+        <ion-label position="floating">Correo Electrónico</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+      </ion-item>
+      <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+        <small>Por favor, ingresa un correo electrónico válido.</small>
+      </div>
+      
+      <ion-item class="custom-input">
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+      </ion-item>
+      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+        <small>La contraseña debe tener al menos 6 caracteres.</small>
+      </div>
+      
+      <ion-button expand="block" class="login-button" type="submit" [disabled]="loginForm.invalid">
+        Ingresar
+      </ion-button>
+    </form>
+
+    <div class="additional-options">
+      <ion-button fill="clear" class="forgot-password-button" routerLink="/reset-password">
+        ¿Olvidaste tu contraseña?
+      </ion-button>
+      
+      <ion-button fill="outline" class="register-button" routerLink="/register">
+        Regístrate
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

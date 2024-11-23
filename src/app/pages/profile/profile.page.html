@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Volver" defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card class="profile-container">
+    <ion-card-header>
+      <ion-avatar class="profile-avatar">
+        <img src="assets/imgs/profile.jpg" alt="Imagen de perfil">
+      </ion-avatar>
+      <ion-card-title>{{ username }}</ion-card-title>
+      <ion-card-subtitle>{{ email }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Nombre de Usuario</ion-label>
+        <ion-input value="{{ username }}" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input value="{{ email }}" readonly></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

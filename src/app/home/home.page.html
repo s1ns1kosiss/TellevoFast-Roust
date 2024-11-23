@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" *ngIf="loading">
+  <div class="loading-container">
+    <img src="assets/img/logo.png" alt="Logo de Fast-Roust" class="loading-logo"/>
+    <h1 class="app-name">Fast-Roust</h1>
+    <p class="welcome-message">Fast-Roust es un servicio eficiente de ride-hailing.</p>
+    <ion-spinner></ion-spinner>
+  </div>
+</ion-content>
+
+<ion-content [fullscreen]="true" class="ion-padding" *ngIf="!loading">
+  <div class="home-container">
+    <h1 class="app-name">Fast-Roust</h1>
+    <img src="assets/img/logo.png" alt="Fast-Roust Logo" class="app-logo"/>
+    <p class="app-description">Fast-Roust es un servicio eficiente de ride-hailing.</p>
+    <ion-button expand="block" color="primary" routerLink="/login">
+      Ingresar
+    </ion-button>
+    <ion-button expand="block" color="secondary" (click)="irARegistro()">
+      Registrarse
+    </ion-button>
+  </div>
+</ion-content>
